@@ -46,19 +46,17 @@ with ObjectDetector.create_from_options(options) as detector:
     box_y = box.origin_y
     box_width = box.width
     box_height = box.height
-
-    left = box_x - box_width / 2
-    bottom = box_y - box_height / 2
+    
+    #name these better
+    left = box_x
+    bottom = box_y #actually the upper part
     right = left + box_width
-    top = bottom + box_height
+    top = bottom + box_height #actually the bottom
 
     with Image.open(image_path) as img:
 
         draw = ImageDraw.Draw(img)
 
         draw.rectangle([(left, bottom), (right, top)], fill = None, outline = (255, 255, 255), width = 5)
-
-        # for some reason the box is off. the second is right on only the beak, the third is just off in the background (robin image)
-        #tested with another image. they are just fucky in general. will investigate
         
         img.show()
